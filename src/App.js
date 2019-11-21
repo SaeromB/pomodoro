@@ -1,24 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Tomatosvg from './components/svg/Tomatosvg'
+import Cancelsvg from './components/svg/Cancelsvg';
+import StartButton from './components/buttons/StartButton/index';
+import ViewTimer from './components/ViewTimer/index';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Tomatosvg width={50} height={50}/>
+    <StartButton/>
+    <button>
+    <Cancelsvg width={24} height={24} style={{fill: '#02DCC0'}}/>
+    </button>
+    <ViewTimer/>
     </div>
   );
 }
