@@ -25,6 +25,9 @@ class SessionTimer extends Component {
             }
           </span>
         </section>
+        <button>play</button>
+        <button>stop</button>
+        <button>refresh</button>
       </section>
     )
   }
