@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import BreakInterval from '../BreakInterval/index';
-import SessionLength from '../SessionLength';
-import SessionTimer from '../SessionTimer';
 import Promodoro from '../Pomodoro';
 
 // break is a boolean telling your application whether or not it should be displaying restMinutes
@@ -11,12 +8,6 @@ import Promodoro from '../Pomodoro';
 
 export class ViewTimer extends Component {
   state = {
-    breakLength: 5,
-    sessionLength: 25,
-    timerMinute: 25,
-    timerSecond: 0,
-    count: 25,
-    isSession : true,
     restMinute: 5,
     workMinute: 25,
     seconds: 0,
@@ -26,25 +17,18 @@ export class ViewTimer extends Component {
   }
 
   render() {
-    const { breakLength, sessionLength, timerMinute, timerSecond, count} = this.state
+    const { restMinute, workMinute, seconds, start} = this.state
     return(
-      <main>
-        <BreakInterval breakintervel={breakLength}/>
-        <SessionLength sessionLength={sessionLength}/>
-        <SessionTimer timerMinute={timerMinute} timerSecond={timerSecond}/>
-        <h1>{count}</h1>
-
         <Promodoro
           timer={this.timer}
-          workMinutes={this.state.workMinute}
-          restMinutes={this.state.restMinute}
-          seconds={this.state.seconds}
-          start={this.state.start}
+          workMinutes={workMinute}
+          restMinutes={restMinute}
+          seconds={seconds}
+          start={start}
           break={this.state.break}
           startTimer={this.startTimer}
           pauseTimer={this.pauseTimer}
           />
-      </main>
     )
   }
 
@@ -75,7 +59,7 @@ export class ViewTimer extends Component {
 
     if (this.state.break){
       this.setState({restMinutes: this.state.seconds === 0 ?
-      this.state.restMinute-1 : this.state.restMinute === 5 ? 4 :
+      this.state.restMinute -1 : this.state.restMinute === 5 ? 4 :
       this.state.restMinute
       })
     }
@@ -99,9 +83,10 @@ export class ViewTimer extends Component {
     this.setState({interval: setInterval(this.timer, 1000), start: 
     !this.state.start})
   }
+
   pauseTimer = () => {
     this.setState(prevState => {
-      return{
+      return {
       restMinute: prevState.restMinute,
       workMinute: prevState.workMinute,
       seconds: prevState.seconds,
@@ -115,4 +100,3 @@ export class ViewTimer extends Component {
 }
 
 export default ViewTimer;
-

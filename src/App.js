@@ -2,7 +2,7 @@ import React from 'react';
 import Tomatosvg from './components/svg/Tomatosvg'
 import Cancelsvg from './components/svg/Cancelsvg';
 import StartButton from './components/buttons/StartButton/index';
-import ViewTimer from './components/ViewTimer/index';
+import ViewTimer from './components/Timer/index';
 
 function App() {
   return (
