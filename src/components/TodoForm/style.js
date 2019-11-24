@@ -4,6 +4,7 @@ export const StyleInput = styled.input.attrs(props => ({
   type: 'text',
   size: props.small ? 5 : undefined,
 }))`
+  display: center;
   font-size: 16px;
   border-radius: 3px;
   border: 1px solid #DDDDDD;
@@ -38,4 +39,8 @@ export const TodoButton = styled.button`
 export const TodoButtonText = styled.span`
   font-size: 12px;
   color: #FFFFFF;
+`
+export const TodoFormContaniner = styled.div`
+  display: flex;
+  justify-content: center;
 `

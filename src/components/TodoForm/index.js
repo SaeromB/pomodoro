@@ -4,12 +4,14 @@ import * as S from './style';
 const TodoForm = props => {
   return(
     <form>
+      <S.TodoFormContaniner>
       <S.StyleInput
         name = 'todo'
         type = 'text'
         placeholder = 'Add a new todo'
         onChange = {props.inputChangeHandler}
       />
+      </S.TodoFormContaniner>
       <S.TodoButtonContainer>
         <S.TodoButton onClick={props.addTask}>
           <S.TodoButtonText>
