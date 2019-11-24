@@ -55,7 +55,7 @@ export class ViewTimer extends Component {
 
   // 
   startTimer = () => {
-    this.setState({interval: setInterval(this.timer, 10), start: 
+    this.setState({interval: setInterval(this.timer, 1000), start: 
     !this.state.start})
   }
 
