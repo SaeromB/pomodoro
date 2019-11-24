@@ -12,13 +12,34 @@ class ViewTodoList extends Component {
     todo: ''
   }
 
+  toggleComplete = itemId => {
+    const todos = this.state.todos.map(todo => {
+      if (todo.id === itemId) {
+        todo.completed = !todo.completed
+      }
+      return todo
+    })
+    this.setState({todos, todo: ''})
+  }
+
   inputChangeHandler = event => {
     this.setState({[event.target.name]: event.target.value})
   }
 
+  removeItems = e => {
+    e.preventDefault();
+    this.setState(prevState => {
+      return {
+        todos: prevState.todos.filer(todo => {
+          return !todo.completed;
+        })
+      }
+    }) 
+  }
+
   addTask = event => {
     event.preventDefault();
-    let newTask = {
+    const newTask = {
       task: this.state.todo,
       id: Date.now(),
       completed: false
@@ -27,6 +48,42 @@ class ViewTodoList extends Component {
       todos: [...this.state.todos, newTask],
       todo: ''
     })
+  }
+
+  addLocalStorage() {
+    for (let key in this.state) {
+      if(localStorage.hasOwnProperty(key)) {
+        let value = localStorage.getItem(key);
+        try {
+          value = JSON.parse(value);
+          this.setState({[key] : value})
+        }
+        catch(event) {
+          this.setState({[key] : value})
+        }
+      }
+    }
+  }
+
+  saveLocalStorage() {
+    for(let key in this.state){
+      localStorage.setItem(key, JSON.stringify(this.state[key]))
+    }
+  }
+
+  componentDidMount(){
+    this.addLocalStorage();
+    window.addEventListener(
+      'before unload',
+      this.saveLocalStorage.bind(this)
+    )
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener(
+      'beforeunload',
+      this.saveLocalStorage.bind(this)
+    )
   }
 
   render() {
@@ -39,7 +96,9 @@ class ViewTodoList extends Component {
           inputChangeHandler={this.inputChangeHandler}
           addTask={this.addTask}/>
         <TodoList
-          todos={this.state.todos}/>
+          todos={this.state.todos}
+          toggleComplete={this.toggleComplete}
+          removeItems={this.removeItems}/>
       </div>
 
     )
