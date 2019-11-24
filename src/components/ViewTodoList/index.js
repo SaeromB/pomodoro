@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import * as S from './style';
 import TodoList from '../TodoList';
 import TodoForm from '../TodoForm';
 
