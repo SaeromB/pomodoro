@@ -12,23 +12,36 @@ class ViewTodoList extends Component {
     todo: ''
   }
 
-  inputChangeHandler = e => {
-    this.setState({[e.target.name] : e.target.value})
+  inputChangeHandler = event => {
+    this.setState({[event.target.name]: event.target.value})
   }
 
+  addTask = event => {
+    event.preventDefault();
+    let newTask = {
+      task: this.state.todo,
+      id: Date.now(),
+      completed: false
+    };
+    this.setState({
+      todos: [...this.state.todos, newTask],
+      todo: ''
+    })
+  }
 
   render() {
-    const {todos, inputChangeHandler} = this.state
-    return(
-      <div>
-        <h1>TodoList</h1>
-        <TodoList
-          todos = {todos}/>
+    return (
+      <div className="App">
+        <h1>To-Do List</h1>
         <TodoForm
-          todos = {todos}
-          inputChangeHandler = {inputChangeHandler}
-          />
+          todos={this.state.todos}
+          value={this.state.todo}
+          inputChangeHandler={this.inputChangeHandler}
+          addTask={this.addTask}/>
+        <TodoList
+          todos={this.state.todos}/>
       </div>
+
     )
   }
 }
