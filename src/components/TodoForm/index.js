@@ -1,18 +1,34 @@
 import React from 'react';
+import * as S from './style';
 
 const TodoForm = props => {
   return(
     <form>
-      <input
+      <S.StyleInput
         name = 'todo'
         type = 'text'
-        placeholder = 'enter a task'
+        placeholder = 'Add a new todo'
         onChange = {props.inputChangeHandler}
       />
-      <button onClick={props.addTask}>Add a Task</button>
-      <button onClick={props.removeItems}>Task Completed</button>
-      <button>Remove Completed</button>
+      <S.TodoButtonContainer>
+        <S.TodoButton onClick={props.addTask}>
+          <S.TodoButtonText>
+          Add Task
+        </S.TodoButtonText>
+        </S.TodoButton>
+        <S.TodoButton onClick={props.removeItems}>
+          <S.TodoButtonText>
+            Completed
+          </S.TodoButtonText>
+        </S.TodoButton>
+        <S.TodoButton>
+          <S.TodoButtonText>
+            Remove 
+          </S.TodoButtonText>
+        </S.TodoButton>
+      </S.TodoButtonContainer>
     </form>
+
   )
 }
 

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import * as S from './style';
 import TodoList from '../TodoList';
 import TodoForm from '../TodoForm';
 
@@ -88,8 +89,7 @@ class ViewTodoList extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>To-Do List</h1>
+      <div>
         <TodoForm
           todos={this.state.todos}
           value={this.state.todo}

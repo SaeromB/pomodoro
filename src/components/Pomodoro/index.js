@@ -10,7 +10,13 @@ const Pomodoro = props => {
       <S.StyleTime>
       {props.break ? props.restMinute : props.workMinutes} : {props.seconds < 10 ? `0${props.seconds}` : `${props.seconds}`}
       </S.StyleTime>
-      <button onClick={props.start ? props.pauseTimer : props.startTimer}>{props.start ? 'Pause' : 'Start'}</button>
+        <S.ButtonContainer>
+          <S.StyleButton onClick={props.start ? props.pauseTimer : props.startTimer}>
+            <S.StyleText>
+            {props.start ? 'Pause' : 'Start'}
+            </S.StyleText>
+          </S.StyleButton>
+        </S.ButtonContainer>
     </div>
   )  
 }

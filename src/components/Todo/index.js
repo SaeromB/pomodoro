@@ -1,4 +1,5 @@
 import React from 'react';
+import * as S from './style';
 
 const Todo = (props) => {
 	return(
@@ -7,7 +8,7 @@ const Todo = (props) => {
       onClick={ e => {
         props.toggleComplete(props.todo.id)}}
     >
-			<p>{props.todo.task}</p>
+			<S.TaskText>{props.todo.task}</S.TaskText>
 		</div>
 	)
 }
