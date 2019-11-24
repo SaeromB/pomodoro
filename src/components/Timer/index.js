@@ -11,23 +11,85 @@ export class ViewTimer extends Component {
     restMinute: 5,
     workMinute: 25,
     seconds: 0,
-    break: false,
+    breakTime: false,
     start: false,
     interval: ''
   }
 
+  timer = () => {
+    this.setState({
+      seconds: this.state.seconds === 0 ? 59 : this.state.seconds - 1
+    })
+
+    // if break is true setState Minutes
+    // if previous returns -1 for restMinute reset break to false and resetMinutes to 5
+
+    const {breakTime, seconds, restMinute, workMinute} = this.state
+    
+    if (breakTime){
+      this.setState({restMinutes : seconds === '00' ?
+      restMinute -1 : restMinute === 5 ? 4 :
+      restMinute
+      })
+    }
+
+    else if (workMinute === -1) {
+      this.setState({restMinutes: 5, breakTime: true})
+    }
+
+    else {
+      this.setState({workMinute : seconds === 0 ?
+      workMinute -1 : workMinute === 25 ? 24 :
+      workMinute
+      })
+
+      //push workMinutes back to 25 and break to true
+      if (this.state.workMinute === -1){
+        this.setState({workMinute: 25, breakTime: true})
+      }
+      else {
+        this.setState({restMinute : this.state.seconds === 0})
+      } 
+    }
+  }
+
+  // 
+  startTimer = () => {
+    this.setState({interval: setInterval(this.timer, 10), start: 
+    !this.state.start})
+  }
+
+  // restTimer = () => {
+  //   this.setState({interval: setInterval(this.timer, 10), breakTime:
+  //   !this.state.breakTime})
+  // }
+
+  pauseTimer = () => {
+    this.setState(prevState => {
+      return {
+      restMinute: prevState.restMinute,
+      workMinute: prevState.workMinute,
+      seconds: prevState.seconds,
+      break: prevState.breakTime,
+      start: false,
+      interval: clearInterval(prevState.interval)
+      }
+    })
+  }
+
   render() {
-    const { restMinute, workMinute, seconds, start} = this.state
+    const { restMinute, workMinute, seconds, start, breakTime} = this.state
     return(
         <Promodoro
-          timer={this.timer}
+          timer={this.timer} 
           workMinutes={workMinute}
           restMinutes={restMinute}
           seconds={seconds}
           start={start}
-          break={this.state.break}
+          breakTime={breakTime}
           startTimer={this.startTimer}
           pauseTimer={this.pauseTimer}
+          restTimer={this.restTimer}
           />
     )
   }
@@ -47,55 +109,6 @@ export class ViewTimer extends Component {
   //   clearInterval(this.myIntervel)
   // }
   // this means that if this.state.second is '0' than show 59 if not show the current second-1
-
-  timer = () => {
-    this.setState({
-      seconds: this.state.seconds === 0 ? 59 : this.state.seconds - 1
-    })
-
-    // if break is true setState Minutes
-    // if previous returns -1 for restMinute reset break to false and resetMinutes to 5
-
-
-    if (this.state.break){
-      this.setState({restMinutes: this.state.seconds === 0 ?
-      this.state.restMinute -1 : this.state.restMinute === 5 ? 4 :
-      this.state.restMinute
-      })
-    }
-    if (this.state.restMinute === -1) {
-      this.setState({restMinutes: 5, break: false})
-    }
-    else {
-      this.setState({workMinute: this.state.seconds === 0 ?
-      this.state.workMinute -1 : this.state.workMinute === 25 ? 24 :
-      this.state.workMinute
-      })
-      //push workMinutes back to 25 and break to true
-      if (this.state.workMinute === -1){
-        this.setState({workMinute: 25, break: true})
-      }
-    }
-  }
-
-  // 
-  startTimer = () => {
-    this.setState({interval: setInterval(this.timer, 1000), start: 
-    !this.state.start})
-  }
-
-  pauseTimer = () => {
-    this.setState(prevState => {
-      return {
-      restMinute: prevState.restMinute,
-      workMinute: prevState.workMinute,
-      seconds: prevState.seconds,
-      break: prevState.break,
-      start: false,
-      interval: clearInterval(prevState.interval)
-      }
-    })
-  }
 
 }
 
