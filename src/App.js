@@ -9,15 +9,15 @@ import { Container } from './components/svg/TomatoStyle';
 function App() {
   return (
     <div>
-    <Container>
-    <Tomatosvg width={50} height={50}/>
-    </Container>
-    <ViewTimer/>
-    <StartButton/>
-    <button>
-    <Cancelsvg width={24} height={24} style={{fill: '#02DCC0'}}/>
-    </button>
-    <ViewTodoList/>
+      <Container>
+      <Tomatosvg width={50} height={50}/>
+      </Container>
+      <ViewTimer/>
+      <StartButton/>
+      <button>
+      <Cancelsvg width={24} height={24} style={{fill: '#02DCC0'}}/>
+      </button>
+      <ViewTodoList/>
     </div>
   );
 }

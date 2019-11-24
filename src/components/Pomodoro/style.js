@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const StyleTime = styled.p`
   display: flex;
   justify-content: center;
-  padding: 30px;
+  color: #02DCC0;
+  font-weight: bold;
+  font-size: 30px;
+
   @media only screen and (min-width: 960px){
     display: flex;
     justify-content: center;
-    size: 100px;
+    color: #02DCC0;
+    font-weight: bold;
+    font-size: 48px;
   }
 `
